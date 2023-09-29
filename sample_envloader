@@ -1,0 +1,1 @@
+export FANGBOT_WEBHOOK_URLS='{"server1": "https://discordapp.com/api/webhooks/1156421427835191366/RcWYGWe6wz0TniiJrVjBcQKPYfFLxEiUobnBDkQbDMIHbt34uEStoYE6Nvn3pYIGpjJZ", "server2": "https://discordapp.com/api/webhooks/1156421427835191366/RcWYGWe6wz0TniiJrVjBcQKPYfFLxEiUobnBDkQbDMIHbt34uEStoYE6Nvn3pYIGpjJZ"}' 
