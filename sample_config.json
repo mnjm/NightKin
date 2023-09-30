@@ -1,0 +1,22 @@
+{
+    "botname": "FangBot",
+    "bot_avatar_url": "https://havi-x.github.io/hosted-images/TSR/BatWithFang.jpeg",
+    "a2s_timeout": 20,
+    "update_interval": 300,
+    "servers_info": {
+        "TSR PvE": {
+            "vr_ip": "<VRising server IP>",
+            "vr_query_port": <VRising query port>,
+            "last_message_id": 0,
+            "timezone": "Asia/Kolkata",
+            "embed": true
+        },
+        "TSR Hardcore PvE": {
+            "vr_ip": "<VRising server IP>",
+            "vr_query_port": <VRising query port>,
+            "last_message_id": 1157263341820071997,
+            "timezone": "Asia/Kolkata",
+            "embed": true
+        }
+    }
+}
