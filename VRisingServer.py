@@ -24,22 +24,23 @@ def parse_players_info(players_info) -> list:
     for player in players_info:
         name = player['name']
         _time = convert_days_hours_mins(player['duration'])
+        # Remove names with empty space
         if not name and name.isspace():
             logging.debug(f"Empty name found {name} with time {_time}")
             continue
         ret_players.append((name, _time))
     return ret_players
 
+class FangBotMessage:
+    def __init__(self, content:str, embed:Embed):
+        self.content = content
+        self.embed = embed
+
 def get_footer(tz: str) -> str:
     ptz = timezone(tz)
     ret = datetime.now(ptz).strftime('%-I:%M %p %b %-d')
     ret = f"at {ret} {tz}"
     return ret
-
-class FangBotMessage:
-    def __init__(self, content:str, embed:Embed):
-        self.content = content
-        self.embed = embed
 
 class VRisingServer:
     a2s_timeout = STEAM_DEFAULT_TIMEOUT
@@ -65,7 +66,7 @@ class VRisingServer:
             info = gs.a2s_info(server_info, timeout=VRisingServer.a2s_timeout)
             players = gs.a2s_players(server_info, timeout=VRisingServer.a2s_timeout)
             success = True
-        except (RuntimeError, timeout) as e:
+        except timeout as e:
             logging.info(f"{self.id} Getting VRising server info failed for {server_info}")
             logging.debug(f"{self.id} Error {e}")
             success = False

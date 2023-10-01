@@ -1,3 +1,5 @@
 __pycache__/*
 config.json*
 envloader
+fly.toml
+fly_envloader
