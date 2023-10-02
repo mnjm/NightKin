@@ -2,6 +2,7 @@ from steam import game_servers as gs
 import logging
 from socket import timeout
 from fangbot.message import FangBotMessage
+from time import sleep
 
 STEAM_DEFAULT_TIMEOUT = 10
 V_RISING_GAME_ID = 1604030
@@ -48,16 +49,20 @@ class VRisingServer:
     def get_server_info(self) -> bool:
         success, info, players = False, {}, {}
         server_info = (self.server_ip, self.server_port)
-        try:
-            logging.debug(f"{self.id} Getting VRising server info for {server_info}")
-            info = gs.a2s_info(server_info, timeout=VRisingServer.a2s_timeout)
-            players = gs.a2s_players(server_info, timeout=VRisingServer.a2s_timeout)
-            success = True
-        except timeout as e:
-            logging.info(f"{self.id} Getting VRising server info failed for {server_info}")
-            logging.debug(f"{self.id} Error {e}")
-            success = False
-            info, players = {}, {}
+        while not success:
+            try:
+                logging.debug(f"{self.id} Getting VRising server info for {server_info}")
+                info = gs.a2s_info(server_info, timeout=VRisingServer.a2s_timeout)
+                players = gs.a2s_players(server_info, timeout=VRisingServer.a2s_timeout)
+                success = True
+            except timeout as e:
+                logging.info(f"{self.id} Getting VRising server info failed for {server_info}. Retrying")
+                logging.debug(f"{self.id} Error {e}")
+                success = False
+                # Sleep if a2s_timeout is not enought
+                if VRisingServer.a2s_timeout <= 10:
+                    sleep(5)
+                    logging.debug("Sleeping for a few secs")
         self.has_info = success
         if self.has_info and info['app_id'] != V_RISING_GAME_ID:
             raise Exception("Not a V Rising Server")

@@ -33,6 +33,7 @@ async def main(config_file: str) -> None:
     logging.info(f"Will update in every {FangBot.interval_secs}s ({FangBot.interval_secs/60}mins)")
     VRisingServer.a2s_timeout = config['a2s_timeout']
 
+    logging.info("-"*60)
     tasks = []
     for sid in config['servers_info']:
         logging.info("Creating a bot for {}".format(sid))
@@ -49,6 +50,7 @@ async def main(config_file: str) -> None:
         task = asyncio.create_task(bot.run())
         tasks.append(task)
         logging.info("Bot creation successful {}".format(sid))
+    logging.info("-"*60)
 
     # Wait for the bots to exit. At present bots doesnt have exit conditions, might add em later.
     for task in tasks: await task
