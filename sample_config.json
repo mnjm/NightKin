@@ -3,20 +3,19 @@
     "bot_avatar_url": "https://havi-x.github.io/hosted-images/TSR/BatWithFang.jpeg",
     "a2s_timeout": 20,
     "update_interval": 300,
+    "embed_color": "#FF0000",
     "servers_info": {
-        "TSR PvE": {
+        "server_id1": {
             "vr_ip": "<VRising server IP>",
             "vr_query_port": <VRising query port>,
             "last_message_id": 0,
             "timezone": "Asia/Kolkata",
-            "embed": true
         },
-        "TSR Hardcore PvE": {
+        "server_id2": {
             "vr_ip": "<VRising server IP>",
             "vr_query_port": <VRising query port>,
-            "last_message_id": 1157263341820071997,
+            "last_message_id": 0,
             "timezone": "Asia/Kolkata",
-            "embed": true
         }
     }
 }

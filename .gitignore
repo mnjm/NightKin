@@ -2,5 +2,5 @@
 *.pyc
 config.json*
 envloader
-fly.toml
+fly.toml*
 fly_envloader

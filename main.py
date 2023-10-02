@@ -2,6 +2,7 @@ import logging
 import json
 import asyncio
 from fangbot import FangBot, ConfigFile
+from fangbot.message import FangBotMessage
 from vrising_steam import VRisingServer
 from argparse import ArgumentParser
 import os
@@ -30,6 +31,7 @@ async def main(config_file: str) -> None:
     FangBot.botname = config['botname']
     FangBot.avatar_url = config['bot_avatar_url']
     FangBot.interval_secs = config['update_interval']
+    FangBotMessage.color = config['embed_color']
     logging.info(f"Will update in every {FangBot.interval_secs}s ({FangBot.interval_secs/60}mins)")
     VRisingServer.a2s_timeout = config['a2s_timeout']
 

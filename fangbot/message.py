@@ -3,7 +3,8 @@ from pytz import timezone
 from datetime import datetime
 
 class FangBotMessage:
-    color = Colour.from_rgb(255, 0, 0)
+    # color = "rgb(255, 0, 0)"
+    color = "#FF0000"
 
     def __init__(self):
         self.has_vr_a2s_data = False
@@ -17,7 +18,7 @@ class FangBotMessage:
     def compose_embed(self):
         embed = Embed()
         if self.has_vr_a2s_data:
-            embed.color = FangBotMessage.color
+            embed.color = Colour.from_str(FangBotMessage.color)
             embed.title = self.server_name
             desc = [ f"**Connect:** {self.server_ip_port}" ]
             active_players = len(self.players)
