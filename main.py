@@ -1,8 +1,8 @@
 import logging
 import json
 import asyncio
-from FangBot import FangBot, ConfigFile
-from VRisingServer import VRisingServer
+from fangbot import FangBot, ConfigFile
+from vrising_steam import VRisingServer
 from argparse import ArgumentParser
 import os
 
@@ -10,7 +10,7 @@ ENV_WEBHOOK_URL_NAME = 'FANGBOT_WEBHOOK_URLS'
 APP_NAME = "FangBot"
 CONFIG_FILE = 'config.json'
 # CONFIG_FILE = "" # enable this to load config file from command line.
-LOGGING_LEVEL = logging.DEBUG
+LOGGING_LEVEL = logging.INFO
 
 async def main(config_file: str) -> None:
     # Load Webhook urls from env
@@ -43,9 +43,8 @@ async def main(config_file: str) -> None:
         wb_url = env_wb_urls[sid]
         server = config['servers_info'][sid]
         bot = FangBot(sid, wb_url, server['vr_ip'],
-                      server['vr_query_port'], server['timezone'],
-                      confobj,
-                      embed=server['embed'])
+                      server['vr_query_port'], confobj)
+
         # Run the bot
         task = asyncio.create_task(bot.run())
         tasks.append(task)
