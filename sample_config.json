@@ -10,12 +10,14 @@
             "vr_query_port": <VRising query port>,
             "last_message_id": 0,
             "timezone": "Asia/Kolkata",
+            "vr_metrics_port": 0
         },
         "server_id2": {
             "vr_ip": "<VRising server IP>",
             "vr_query_port": <VRising query port>,
             "last_message_id": 0,
             "timezone": "Asia/Kolkata",
+            "vr_metrics_port": 0
         }
     }
 }

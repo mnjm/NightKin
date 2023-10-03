@@ -14,6 +14,7 @@ class FangBotMessage:
         self.max_players = 0
         self.players = []
         self.timezone = ""
+        self.territories_info = ""
 
     def compose_embed(self):
         embed = Embed()
@@ -23,6 +24,7 @@ class FangBotMessage:
             desc = [ f"**Connect:** {self.server_ip_port}" ]
             active_players = len(self.players)
             desc.append(f"**Active Players:** {active_players}/{self.max_players}")
+            if self.territories_info: desc.append(self.territories_info)
             if len(self.players) > 0:
                 desc.append("\n**Players**")
             embed.description = "\n".join(desc)

@@ -46,7 +46,7 @@ async def main(config_file: str) -> None:
         wb_url = env_wb_urls[sid]
         server = config['servers_info'][sid]
         bot = FangBot(sid, wb_url, server['vr_ip'],
-                      server['vr_query_port'], confobj)
+                      server['vr_query_port'], confobj, server['vr_metrics_port'])
 
         # Run the bot
         task = asyncio.create_task(bot.run())

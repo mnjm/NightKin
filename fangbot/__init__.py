@@ -2,6 +2,7 @@ from discord import Webhook, NotFound, Forbidden, Embed
 import aiohttp
 import asyncio
 from vrising_steam import VRisingServer
+from vrising_metrics import VRisingMetrics
 from .message import FangBotMessage
 import logging
 import json
@@ -32,11 +33,15 @@ class FangBot:
     avatar_url = 'https://havi-x.github.io/hosted-images/TSR/BatWithFang.jpeg'
     interval_secs = INTERVAL_SECS
 
-    def __init__(self, id:str, webhook_url:str, vr_ip:str, vr_port:int, config:ConfigFile):
+    def __init__(self, id:str, webhook_url:str, vr_ip:str, vr_port:int, config:ConfigFile,
+                 metrics_port:int = 0):
         self.id = id
         self.webhook_url = webhook_url
         self.config = config
         self.vrserver = VRisingServer(id, vr_ip, vr_port)
+        self.vr_metrics = None
+        if metrics_port > 0:
+            self.vr_metrics = VRisingMetrics(f"http://{vr_ip}:{metrics_port}/metrics")
 
     async def send_edit_message(self, webhook:Webhook, embed:Embed) -> None:
         last_message_id = self.config.get_server_config_value(self.id, "last_message_id")
@@ -73,6 +78,11 @@ class FangBot:
                 # Get contents from V Rising server updated in FangBotMessage
                 succ = self.vrserver.write_data_to_FangBotMessage(fbmessage)
                 assert succ, "FangBotMessage not updated but VRising server has info? Why?"
+
+                # Get VRising metrics
+                if self.vr_metrics:
+                    succ = self.vr_metrics.load_data()
+                    if succ: self.vr_metrics.write_data_to_FangBotMessage(fbmessage)
 
                 # Create webhook and send message
                 logging.debug(f"{self.id} Sending message")
