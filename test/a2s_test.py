@@ -10,6 +10,9 @@ def main():
     print(info)
     players = gs.a2s_players(server_info, timeout=TIMEOUT)
     print(players)
+    for player in players:
+        name, time = player['name'], player['duration']
+        print(name, time, name.isspace(), name == "")
 
 if __name__ == "__main__":
     main()

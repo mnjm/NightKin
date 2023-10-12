@@ -24,7 +24,7 @@ def parse_players_info(players_info) -> list:
         name = player['name']
         _time = convert_days_hours_mins(player['duration'])
         # Remove names with empty space
-        if not name and name.isspace():
+        if not name or name.isspace():
             logging.debug(f"Empty name found {name} with time {_time}")
             continue
         ret_players.append((name, _time))
@@ -76,7 +76,7 @@ class VRisingServer:
             players_info = parse_players_info(players_info)
             fbmessage.has_vr_a2s_data = True
             fbmessage.server_name = info['name']
-            fbmessage.server_ip_port = f"{self.server_ip}:{self.server_port}"
+            fbmessage.server_ip_port = f"{self.server_ip}:{info['port']}"
             fbmessage.max_players = info['max_players']
             fbmessage.players = players_info
         return self.has_info

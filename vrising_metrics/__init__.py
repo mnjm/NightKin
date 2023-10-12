@@ -46,12 +46,6 @@ class VRisingMetrics:
         return success
 
     def write_data_to_FangBotMessage(self, fbmessage:FangBotMessage) -> bool:
-        def form(name, avail, total):
-            name = name + " "*(18-len(name))
-            ret = f"{name} {avail:02d} / {total:02d}"
-            print(ret)
-            return ret
-
         if not self.has_info: return False
         header = ['Region', 'Free', 'Total']
         data = []

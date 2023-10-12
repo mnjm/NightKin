@@ -11,10 +11,10 @@ async def main() -> None:
     url = sys.argv[1]
     print(f'url = {url}')
 
-    message = "I'm currently in the beta testing phase. If you don't see the above messages getting updated every 10-12 minutes, please notify <@866338551947722822>"
+    message = "I'm currently in the beta testing phase. If you don't see the above message/s getting updated every 10-12 minutes, please notify <@866338551947722822>"
     print(f'message = {message}')
     bot_config = {}
-    with open("config.json") as fp:
+    with open("../config.json") as fp:
         bot_config = json.load(fp)
 
     async with aiohttp.ClientSession() as sess:
