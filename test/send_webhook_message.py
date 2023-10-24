@@ -8,13 +8,18 @@ import asyncio
 import aiohttp
 
 async def main() -> None:
+    assert len(sys.argv) == 3 or len(sys.argv) == 4, "Pass proper arguments"
     url = sys.argv[1]
-    print(f'url = {url}')
+    config_file = sys.argv[2]
+    test_flag = len(sys.argv) == 4 and sys.argv[3] == 'test'
 
-    message = "I'm currently in the beta testing phase. If you don't see the above message/s getting updated every 10-12 minutes, please notify <@866338551947722822>"
+    message = "If you don't see the above message/s getting updated every 10-12 minutes, please notify <@866338551947722822>"
+    if test_flag:
+        message = "I'm currently in the beta testing phase. " + message
+
     print(f'message = {message}')
     bot_config = {}
-    with open("../config.json") as fp:
+    with open(config_file) as fp:
         bot_config = json.load(fp)
 
     async with aiohttp.ClientSession() as sess:

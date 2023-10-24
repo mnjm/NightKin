@@ -2,5 +2,4 @@
 *.pyc
 config.json*
 envloader
-fly.toml*
-fly_envloader
+FangBot.log*

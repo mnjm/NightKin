@@ -1,9 +1,9 @@
 # FangBot
 
-Webhook based discord bot that fetches information from VRising servers and displays it in discord.
+Discord webhook to display real-time updates of players on V Rising servers. Using Steam A2P API
 ![Image 1](https://github.com/mnjm/FangBot/blob/7da78d18317642ce8e9f5b92f2484bf05f5f970f/FangBot-Image1.png)
 
-![Image 2](https://github.com/mnjm/FangBot/blob/7da78d18317642ce8e9f5b92f2484bf05f5f970f/FangBot-Image2.png)
+![Image 2](https://github.com/mnjm/FangBot/blob/f6778f21efc0f6d07484b8263352c311d28a851d/FangBot-Update.png)
 
 ## Configuration
 
@@ -52,4 +52,4 @@ export FANGBOT_WEBHOOK_URLS='{"server1": "<webhook_link>", "server2": "<webhook_
   And mention the port in `config.json` in `vr_metrics_port`
 
 ## Run
-`python main.py`
+`python main.py config.json`
