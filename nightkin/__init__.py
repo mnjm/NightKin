@@ -3,7 +3,7 @@ import aiohttp
 import asyncio
 from vrising_steam import VRisingServer
 from vrising_metrics import VRisingMetrics
-from .message import FangBotMessage
+from .message import NightKinMessage
 import logging
 import json
 
@@ -28,8 +28,8 @@ class ConfigFile:
             json.dump(self.config, fp, indent=4)
         return
 
-class FangBot:
-    botname = 'FangBot'
+class NightKin:
+    botname = 'NightKin'
     avatar_url = 'https://havi-x.github.io/hosted-images/TSR/BatWithFang.jpeg'
     interval_secs = INTERVAL_SECS
 
@@ -57,7 +57,7 @@ class FangBot:
             logging.info(f"{self.id} fetching message failed. Creating new message")
             # Sending a new message
             msg = await webhook.send(content="", embed=embed, wait=True,
-                                     username=FangBot.botname, avatar_url=FangBot.avatar_url,
+                                     username=NightKin.botname, avatar_url=NightKin.avatar_url,
                                      silent=True)
             # update message id in config
             self.config.update_message_id(self.id, msg.id)
@@ -72,17 +72,17 @@ class FangBot:
             vr_has_info = self.vrserver.get_server_info()
             # Send/Update message only if v rising server has info otherwise continue
             if vr_has_info:
-                # Create a new FangBotMessage
-                fbmessage = FangBotMessage()
+                # Create a new NightKinMessage
+                fbmessage = NightKinMessage()
                 fbmessage.timezone = self.config.get_server_config_value(self.id, 'timezone')
-                # Get contents from V Rising server updated in FangBotMessage
-                succ = self.vrserver.write_data_to_FangBotMessage(fbmessage)
-                assert succ, "FangBotMessage not updated but VRising server has info? Why?"
+                # Get contents from V Rising server updated in NightKinMessage
+                succ = self.vrserver.write_data_to_NightKinMessage(fbmessage)
+                assert succ, "NightKinMessage not updated but VRising server has info? Why?"
 
                 # Get VRising metrics
                 if self.vr_metrics:
                     succ = self.vr_metrics.load_data()
-                    if succ: self.vr_metrics.write_data_to_FangBotMessage(fbmessage)
+                    if succ: self.vr_metrics.write_data_to_NightKinMessage(fbmessage)
 
                 # Create webhook and send message
                 logging.debug(f"{self.id} Sending message")
@@ -91,4 +91,4 @@ class FangBot:
                     await self.send_edit_message(webhook, fbmessage.compose_embed())
 
             # Sleep for some time
-            await asyncio.sleep(FangBot.interval_secs)
+            await asyncio.sleep(NightKin.interval_secs)

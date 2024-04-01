@@ -45,7 +45,7 @@ class VRisingMetrics:
             logging.error(f"VRisingMetrics not found!{e}")
         return success
 
-    def write_data_to_FangBotMessage(self):
+    def write_data_to_NightKinMessage(self):
         header = ["Region", "Free Territories", "Total Territories"]
         data = []
         data.append([ "FarbaneWoods", self.fb_free, self.fb_free + self.fb_occupied ])
@@ -94,4 +94,4 @@ if __name__ == "__main__":
     url = sys.argv[1]
     met = VRisingMetrics(url)
     met.load_data()
-    met.write_data_to_FangBotMessage()
+    met.write_data_to_NightKinMessage()

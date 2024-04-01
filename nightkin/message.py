@@ -2,7 +2,7 @@ from discord import Embed, Colour
 from pytz import timezone
 from datetime import datetime
 
-class FangBotMessage:
+class NightKinMessage:
     # color = "rgb(255, 0, 0)"
     color = "#FF0000"
 
@@ -19,7 +19,7 @@ class FangBotMessage:
     def compose_embed(self):
         embed = Embed()
         if self.has_vr_a2s_data:
-            embed.color = Colour.from_str(FangBotMessage.color)
+            embed.color = Colour.from_str(NightKinMessage.color)
             embed.title = self.server_name
             desc = [ f"**Connect:** {self.server_ip_port}" ]
             active_players = len(self.players)

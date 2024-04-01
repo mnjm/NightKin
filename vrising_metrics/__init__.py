@@ -1,6 +1,6 @@
 from urllib.request import urlopen
 from urllib.error import URLError
-from fangbot.message import FangBotMessage
+from nightkin.message import NightKinMessage
 import logging
 from table2ascii import table2ascii
 
@@ -45,7 +45,7 @@ class VRisingMetrics:
         self.has_info = success
         return success
 
-    def write_data_to_FangBotMessage(self, fbmessage:FangBotMessage) -> bool:
+    def write_data_to_NightKinMessage(self, fbmessage:NightKinMessage) -> bool:
         if not self.has_info: return False
         header = ['Region', 'Free', 'Total']
         data = []

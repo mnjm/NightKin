@@ -1,16 +1,16 @@
-# FangBot
+# NightKin
 
 Discord webhook to display real-time updates of players on V Rising servers. Using Steam A2P API
-![Image 1](https://github.com/mnjm/FangBot/blob/7da78d18317642ce8e9f5b92f2484bf05f5f970f/FangBot-Image1.png)
+![Image 1](https://github.com/mnjm/NightKin/blob/7da78d18317642ce8e9f5b92f2484bf05f5f970f/FangBot-Image1.png)
 
-![Image 2](https://github.com/mnjm/FangBot/blob/f6778f21efc0f6d07484b8263352c311d28a851d/FangBot-Update.png)
+![Image 2](https://github.com/mnjm/NightKin/blob/f6778f21efc0f6d07484b8263352c311d28a851d/FangBot-Update.png)
 
 ## Configuration
 
 ### Create config.json file that contains
 ```
 {
-    "botname": "FangBot",
+    "botname": "NightKin",
     "bot_avatar_url": "https://havi-x.github.io/hosted-images/TSR/BatWithFang.jpeg",
     "a2s_timeout": 20,
     "update_interval": 300,

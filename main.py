@@ -3,21 +3,21 @@ from logging.handlers import RotatingFileHandler
 import sys
 import json
 import asyncio
-from fangbot import FangBot, ConfigFile
-from fangbot.message import FangBotMessage
+from nightkin import NightKin, ConfigFile
+from nightkin.message import NightKinMessage
 from vrising_steam import VRisingServer
 from argparse import ArgumentParser
 import os
 
-ENV_WEBHOOK_URL_NAME = 'FANGBOT_WEBHOOK_URLS'
-APP_NAME = "FangBot"
+ENV_WEBHOOK_URL_NAME = 'NIGHTKIN_WEBHOOK_URLS'
+APP_NAME = "NightKin"
 # CONFIG_FILE = 'config.json'
 CONFIG_FILE = "" # enable this to load config file from command line.
 STD_LOGGING_LEVEL = logging.INFO
 
 async def main(config_file: str) -> None:
     logging.info("x"*97)
-    logging.info("x"*40+" FangBot Started "+"x"*40)
+    logging.info("x"*40+" NightKin Started "+"x"*40)
     logging.info("x"*97)
 
     # Load Webhook urls from env
@@ -34,24 +34,24 @@ async def main(config_file: str) -> None:
     config = confobj.config
     logging.debug("Loaded Config\n" + json.dumps(config, indent=4))
     # Update configurations
-    FangBot.botname = config['botname']
-    FangBot.avatar_url = config['bot_avatar_url']
-    FangBot.interval_secs = config['update_interval']
-    FangBotMessage.color = config['embed_color']
-    logging.info(f"Will update in every {FangBot.interval_secs}s ({FangBot.interval_secs/60}mins)")
+    NightKin.botname = config['botname']
+    NightKin.avatar_url = config['bot_avatar_url']
+    NightKin.interval_secs = config['update_interval']
+    NightKinMessage.color = config['embed_color']
+    logging.info(f"Will update in every {NightKin.interval_secs}s ({NightKin.interval_secs/60}mins)")
     VRisingServer.a2s_timeout = config['a2s_timeout']
 
     logging.info("-"*60)
     tasks = []
     for sid in config['servers_info']:
         logging.info("Creating a bot for {}".format(sid))
-        # Create FangBot for the server
+        # Create NightKin for the server
         if not sid in env_wb_urls:
             logging.error(f"Webhook URL for '{sid}' not found in env var {ENV_WEBHOOK_URL_NAME}. Exiting!")
             return
         wb_url = env_wb_urls[sid]
         server = config['servers_info'][sid]
-        bot = FangBot(sid, wb_url, server['vr_ip'],
+        bot = NightKin(sid, wb_url, server['vr_ip'],
                       server['vr_query_port'], confobj, server['vr_metrics_port'])
 
         # Run the bot
@@ -76,7 +76,7 @@ def setup_file_stdout_loggers(config_file):
     logging.getLogger().addHandler(console)
 
     # Add file rotating handler, with level DEBUG
-    logfilepath = os.path.join(os.path.dirname(config_file), "FangBot.log")
+    logfilepath = os.path.join(os.path.dirname(config_file), "NightKin.log")
     fileHandler = RotatingFileHandler(filename=logfilepath, mode='a', maxBytes=5*1024*1024, backupCount=3, encoding=None, delay=False)
     fileHandler.setLevel(logging.DEBUG)
     fileHandler.setFormatter(formater)
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     config_file = CONFIG_FILE
     if not CONFIG_FILE:
         # Command line args
-        parser = ArgumentParser("FangBot - Webhook based Discord bot to display live VRising server data")
+        parser = ArgumentParser("NightKin - Webhook based Discord bot to display live VRising server data")
         parser.add_argument("config_file", help="Json Config file")
         parser.add_argument("--debug", help="Enables debug log", action='store_true')
         args = parser.parse_args()

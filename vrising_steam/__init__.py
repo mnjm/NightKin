@@ -1,7 +1,7 @@
 from steam import game_servers as gs
 import logging
 from socket import timeout
-from fangbot.message import FangBotMessage
+from nightkin.message import NightKinMessage
 from time import sleep
 
 STEAM_DEFAULT_TIMEOUT = 10
@@ -70,7 +70,7 @@ class VRisingServer:
         self.players_info = players
         return self.has_info
 
-    def write_data_to_FangBotMessage(self, fbmessage:FangBotMessage) -> bool:
+    def write_data_to_NightKinMessage(self, fbmessage:NightKinMessage) -> bool:
         if self.has_info:
             info, players_info = self.server_info, self.players_info
             players_info = parse_players_info(players_info)
