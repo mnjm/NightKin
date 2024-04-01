@@ -8,7 +8,7 @@ Discord webhook to display real-time updates of players on V Rising servers. Usi
 ## Configuration
 
 ### Create config.json file that contains
-```
+```json
 {
     "botname": "NightKin",
     "bot_avatar_url": "https://havi-x.github.io/hosted-images/TSR/BatWithFang.jpeg",
@@ -34,11 +34,11 @@ Discord webhook to display real-time updates of players on V Rising servers. Usi
 }
 ```
 ### Load webhook urls into environment vars
-```
-export FANGBOT_WEBHOOK_URLS='{"server1": "<webhook_link>", "server2": "<webhook_link>"}' 
+```bash
+export NIGHT_WEBHOOK_URLS='{"server1": "<webhook_link>", "server2": "<webhook_link>"}' 
 ```
 ### To enable castle territories, enable Metrics API in `ServerHostSettings.json` and configure the outgoing port
-```
+```json
 {
   "Name": "VRising Server",
   ...
